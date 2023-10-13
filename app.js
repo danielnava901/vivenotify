@@ -5,13 +5,15 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const createError = require('http-errors');
 const bodyParser = require('body-parser');
-require('dotenv').config();
+const {app, http} = require('./server');
 
+require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production'
 console.log("inti: ",dev, process.env.NODE_ENV);
 
-const app = express();
+
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: 'mi-secreto', resave: false, saveUninitialized: false }));
@@ -67,6 +69,6 @@ app.use(function(err, req, res, next) {
 });
 
 // Iniciar el servidor
-app.listen(process.env.PORT || 3000, () => {
+http.listen(process.env.PORT || 3000, () => {
     console.log(`App en puerto: ${process.env.PORT || 3000}`);
 });

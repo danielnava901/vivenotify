@@ -21,8 +21,15 @@
             Click</button>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
     <script>
-       window.onload = function () {
+        const socket = io('http://localhost:4444');
+
+        socket.on('report_completed', (mensaje) => {
+            console.log("llega mensaje", {mensaje});
+        });
+
+        window.onload = function () {
            document.getElementById("btnGetReport").onclick = function() {
                 $.ajax({
                     url: "/dashboard/reports/getReport",
