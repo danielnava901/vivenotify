@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+</head>
+<body class="w-full">
+    <h1>Welcome to the Dashboard</h1>
+    <!-- p>Hello, <= user.username >!</p -->
+    <a href="/">Home</a>
+    <a href="/logout">Logout</a>
+
+    <div class="w-full border p-4 flex flex-col">
+        <strong>Pedir reporte</strong>
+        <button id="btnGetReport" class="py-2 px-4 bg-green-600 text-white hover:opacity-75">
+            Click</button>
+    </div>
+
+    <script>
+       window.onload = function () {
+           document.getElementById("btnGetReport").onclick = function() {
+                $.ajax({
+                    url: "/dashboard/reports/getReport",
+                    data: {},
+                    beforeSend: () => {},
+                    complete: () => {},
+                    success: (response) => {
+
+                    },
+                    error: () => {}
+                })
+           }
+       }
+    </script>
+
+</body>
+</html>
