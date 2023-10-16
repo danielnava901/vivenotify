@@ -12,27 +12,30 @@
 <body class="w-full">
     <%- include('../ejsComponents/headerComponent.ejs'); -%>
     
-    <div class="w-full border p-4 flex flex-col">
-        <strong>Pedir reporte</strong>
-        <button id="btnGetReport" class="py-2 px-4 bg-green-600 text-white hover:opacity-75">
-            Click</button>
+    <div class="w-full border p-4 flex flex-col" id="reportList">
+       Lista de reportes
     </div>
 
     <%- include('../ejsComponents/notificationComponent.ejs'); -%>
-    <script>
-        window.onload = function () {
-           document.getElementById("btnGetReport").onclick = function() {
-                $.ajax({
-                    url: "/dashboard/reports/getReport",
-                    data: {},
-                    beforeSend: () => {},
-                    complete: () => {},
-                    success: (response) => {
 
-                    },
-                    error: () => {}
-                })
-           }
+    <script>
+        //const socket = io();
+
+        window.onload = function () {
+            console.log("entras a reportes")
+           
+            socket.on('report_completed', (mensaje) => {
+        
+                mensaje = JSON.parse(mensaje);
+                
+                const reportList = document.getElementById("reportList");
+                reportList.innerHTML = reportList.innerHTML + `<div>
+                    reporte: ${mensaje.id}
+                </div>`;
+
+                //TODO: aqui iría la peticion refresh de lista
+                
+            });
        }
     </script>
 

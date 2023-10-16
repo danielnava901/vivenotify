@@ -1,0 +1,21 @@
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+    const socket = io();
+
+    function riseNotification(text) {
+        let template = `<div style="position: absolute; right:0; top: 0;" 
+            class="border p-4 bg-green-400">
+            ${text}
+        </div>`;
+
+        document.body.innerHTML += template;
+    }
+
+    socket.on('report_completed', (mensaje) => {
+        
+        mensaje = JSON.parse(mensaje);
+        console.log("llega mensaje", {mensaje});
+        
+        riseNotification(`Notificacion de: ${mensaje.user}`);
+    });
+</script>
