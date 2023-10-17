@@ -1,3 +1,5 @@
+const express = require("express");
+const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -10,8 +12,6 @@ require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production'
 console.log("inti: ",dev, process.env.NODE_ENV);
-
-
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +31,9 @@ app.use(function(req, res, next) {
 });
 app.use(flash());
 
+//app.use(express.static(path.resolve(__dirname, '../vivenotify-client/dist')));
+
+
 /********************** Configuración de las vistas **************/
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -40,7 +43,7 @@ const dashboardRouter = require('./routes/dashboard');
 const dashboardReportsRouter = require('./routes/dashboard/reports');
 const authRouter = require('./routes/auth');
 const clientRouter = require('./routes');
-
+//const frontClientRouter = require('./routes/client/client');
 
 
 app.use('/dashboard', dashboardRouter);
